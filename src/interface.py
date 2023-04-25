@@ -3,15 +3,34 @@ import tkinter as tk
 class interface:
     def __init__(self):
         self.window=tk.Tk()
-        self.lab_lab=tk.Label(text="Химическая реакция:",width=200,height=5)
+        self.window.geometry("800x200")        
+        self.lab_lab=tk.Label(text="Химическая реакция:",width=100,height=5)
         self.lab_lab.pack()
         
-        self.fabcd=tk.Frame()
-        self.fabcd.pack(side=tk.LEFT)
+        self.A=tk.Entry()
+        self.A.pack(side=tk.LEFT, padx=10,pady=10)
         
-        self.eA=tk.Entry(width=10)
-        self.eA.pack(side=tk.LEFT)
-        self.lbP=tk.Label(text="+",width=1)
-        self.lbP.pack(side=tk.LEFT())
+        self.LP=tk.Label(text="+")
+        self.LP.pack(side=tk.LEFT,padx=1,pady=1)
+        
+        self.B=tk.Entry()
+        self.B.pack(side=tk.LEFT, padx=10,pady=10)
+        
+        self.LE=tk.Label(text="=")
+        self.LE.pack(side=tk.LEFT,padx=1,pady=1)
+        
+        self.C=tk.Entry()
+        self.C.pack(side=tk.LEFT, padx=10,pady=10)
+        
+        self.LP=tk.Label(text="+")
+        self.LP.pack(side=tk.LEFT,padx=1,pady=1)
+        
+        self.D=tk.Entry()
+        self.D.pack(side=tk.LEFT, padx=10,pady=10)
+        
+        self.f=tk.Frame()
+        self.f.pack()
+        
+        
 i=interface()
 tk.mainloop()
