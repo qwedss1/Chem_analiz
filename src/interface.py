@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import ttk
 
 class interface:
     def __init__(self):
@@ -27,9 +28,11 @@ class interface:
         
         self.D=tk.Entry()
         self.D.pack(side=tk.LEFT, padx=10,pady=10)
-        
-        self.f=tk.Frame()
-        self.f.pack()
+        self.lb=tk.Label()
+        self.lb.pack()
+        variant=["Solid","Liquid","Gas"]
+        self.comA=ttk.Combobox(values=variant)
+        self.comA.pack(side=tk.LEFT,padx=12,pady=1)
         
         
 i=interface()
