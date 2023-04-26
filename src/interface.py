@@ -4,7 +4,7 @@ from tkinter import ttk
 class interface:
     def __init__(self):
         self.window=tk.Tk()
-        self.window.geometry("800x200")        
+        self.window.geometry("1000x200")        
         self.lab_lab=tk.Label(text="Химическая реакция:",width=100,height=5)
         self.lab_lab.pack()
         
@@ -28,11 +28,11 @@ class interface:
         
         self.D=tk.Entry()
         self.D.pack(side=tk.LEFT, padx=10,pady=10)
-        self.lb=tk.Label()
+        self.lb=tk.Frame()
         self.lb.pack()
         variant=["Solid","Liquid","Gas"]
         self.comA=ttk.Combobox(values=variant)
-        self.comA.pack(side=tk.LEFT,padx=12,pady=1)
+        self.comA.pack()
         
         
 i=interface()
