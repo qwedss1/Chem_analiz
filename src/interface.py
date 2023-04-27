@@ -2,8 +2,9 @@ import tkinter as tk
 from tkinter import ttk
 
 class interface:
-    def __init__(self):
-        self.win=tk.Tk()   
+    def __init__(self):  
+        self.win=tk.Tk() 
+        self.win.title("Chem-analizis")
         
         tk.Label(text="Химическая реакция:").grid(row=0,column=0,stick="we",columnspan=7)
         
@@ -59,6 +60,6 @@ class interface:
         self.Flag=ttk.Checkbutton(text="Стехиометрическая смесь")
         self.Flag.grid(row=6, column=3)
         tk.Button(text="Ready").grid(row=10,column=0,stick="we",columnspan=7)
-        
+
 i=interface()
 tk.mainloop()
