@@ -1,11 +1,9 @@
 import tkinter as tk
 from tkinter import ttk
-
-class interface:
+class IF:
     def __init__(self):  
         self.win=tk.Tk() 
         self.win.title("Chem-analizis")
-        
         tk.Label(text="Химическая реакция:").grid(row=0,column=0,stick="we",columnspan=7)
         
         tk.Label(text="Вещество А").grid(row=1,column=0)
@@ -54,12 +52,21 @@ class interface:
         self.C_c=tk.Entry()
         self.C_c.grid(row=5,column=4)
         
-        self.C_c=tk.Entry()
-        self.C_c.grid(row=5,column=6)
+        self.D_c=tk.Entry()
+        self.D_c.grid(row=5,column=6)
         
         self.Flag=ttk.Checkbutton(text="Стехиометрическая смесь")
         self.Flag.grid(row=6, column=3)
-        tk.Button(text="Ready").grid(row=10,column=0,stick="we",columnspan=7)
-
-i=interface()
-tk.mainloop()
+        tk.Button(text="Ready",command=self.com_red).grid(row=10,column=0,stick="we",columnspan=7)
+    def com_red(self):
+        self.A=self.A.get()
+        self.B=self.B.get()
+        self.C=self.C.get()
+        self.D=self.D.get()
+        
+        self.A_c=self.A_c.get()
+        self.B_c=self.B_c.get()
+        self.C_c=self.C_c.get()
+        self.D_c=self.D_c.get()
+        
+        self.win.destroy()
