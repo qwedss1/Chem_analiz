@@ -2,6 +2,17 @@
 В этом файле нужно описать всю рограмму:
 ВСЕ ИМПОРТЫ МОДУЛЕЙ
 модули:(надо выделить!!!)
+НУжно рассинхронить поля для ввода молей!
+Нужно сделать стех смесь кнопкой
+Нужено застсвить работать флаг(кнопку?) стех смесь
+нужно заставить программу выводить правильный словарь
+Нужно написать модуль возвращающий словарь отформатированный верно пример - А+В=с-> {"A":[c_A,state],"B":[],C:[]}(D нет в словаре)
+    НУЖНО составить скрепер ,который соберет информацию с сайта(его еще нужно выбрать)
+        Пусть он будет динамически вытаскивать информацию с сайта при запросе, затем он будет помещать эту информацию в БД ,которая изначально пуста. 
+Нужно создать модуль для нахождения z-ok
+нужно создать термодинамический модуль
+нужно создать модуль графиков
+нужно приготовить тесты
 '''
 
 import tkinter as tk
@@ -61,23 +72,18 @@ class IF:
         
         tk.Label(text="moles:").grid(row=4,column=0,columnspan=7)
         
-        self.A_c=tk.Entry(textvariable=self.A_c).grid(row=5,column=0)
+        tk.Entry(textvariable=self.A_c).grid(row=5,column=0)
         
-        self.B_c=tk.Entry(textvariable=self.B_c).grid(row=5,column=2)
+        tk.Entry(textvariable=self.B_c).grid(row=5,column=2)
         
-        self.C_c=tk.Entry(textvariable=self.C_c).grid(row=5,column=4)
+        tk.Entry(textvariable=self.C_c).grid(row=5,column=4)
         
-        self.D_c=tk.Entry(textvariable=self.D_c).grid(row=5,column=6)
+        tk.Entry(textvariable=self.D_c).grid(row=5,column=6)
         
         self.Flag=ttk.Checkbutton(text="Стехиометрическая смесь",command=self.changed_Flag)
         self.Flag.grid(row=6, column=3)
         tk.Button(text="Ready",command=self.com_red).grid(row=10,column=0,stick="we",columnspan=7)
     def com_red(self):
-        self.A_s=self.A_s.get()
-        self.B_s=self.B_s.get()
-        self.C_s=self.C_s.get()
-        self.D_s=self.D_s.get()
-        
         self.win.destroy()
         p.next1()
     def changed_Flag(self):
