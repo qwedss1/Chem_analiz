@@ -28,17 +28,22 @@ class IF:
         tk.Label(text="Вещество B").grid(row=1,column=2)
         tk.Label(text="Вещество C").grid(row=1,column=4)
         tk.Label(text="Вещество D").grid(row=1,column=6)
+
+        self.A=None
+        self.B=None
+        self.C=None
+        self.D=None
         
-        self.A=''
-        self.B=''
-        self.C=''
-        self.D=''
+        self.A_c=None
+        self.B_c=None
+        self.C_c=None
+        self.D_c=None
         
-        self.A_c=0
-        self.B_c=0
-        self.C_c=0
-        self.D_c=0
-        
+        self.As=None
+        self.Bs=None
+        self.Cs=None
+        self.Ds=None
+
         tk.Entry(textvariable=self.A).grid(row=2,column=0,padx=30,pady=10)
         
         tk.Label(text="+").grid(row=2,column=1)
@@ -54,19 +59,19 @@ class IF:
         tk.Entry(textvariable=self.D).grid(row=2,column=6,padx=30,pady=10)
         
         val=["Gas","Solid","Liquid"]
-        self.A_s=ttk.Combobox(values=val,state="readonly")
+        self.A_s=ttk.Combobox(values=val,state="readonly",textvariable=self.As)
         self.A_s.current(0)
         self.A_s.grid(row=3,column=0)
         
-        self.B_s=ttk.Combobox(values=val,state="readonly")
+        self.B_s=ttk.Combobox(values=val,state="readonly",textvariable=self.Bs)
         self.B_s.current(0)
         self.B_s.grid(row=3,column=2)
         
-        self.C_s=ttk.Combobox(values=val,state="readonly")
+        self.C_s=ttk.Combobox(values=val,state="readonly",textvariable=self.Cs)
         self.C_s.current(0)
         self.C_s.grid(row=3,column=4)
         
-        self.D_s=ttk.Combobox(values=val,state="readonly")
+        self.D_s=ttk.Combobox(values=val,state="readonly",textvariable=self.Ds)
         self.D_s.current(0)
         self.D_s.grid(row=3,column=6)
         
@@ -98,10 +103,10 @@ class prog:
         self.inter1=IF()
     def next1(self):
         d=dict()
-        d[self.inter1.A]=[self.inter1.A_c,self.inter1.A_s]
-        d[self.inter1.B]=[self.inter1.B_c,self.inter1.B_s]
-        d[self.inter1.C]=[self.inter1.C_c,self.inter1.C_s]
-        d[self.inter1.D]=[self.inter1.D_c,self.inter1.D_s]
+        d[self.inter1.A.get()]=[self.inter1.A_c,self.inter1.As]
+        d[self.inter1.B]=[self.inter1.B_c,self.inter1.Bs]
+        d[self.inter1.C]=[self.inter1.C_c,self.inter1.Cs]
+        d[self.inter1.D]=[self.inter1.D_c,self.inter1.Ds]
         
         print(d)
         
