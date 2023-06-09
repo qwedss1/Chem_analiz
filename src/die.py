@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 
-class IF:
+class windowIn:
     def __init__(self):  
         self.main=tk.Tk() 
         self.main.title("Chem-analizis")
@@ -69,23 +69,14 @@ class IF:
         self.B=self.B.get()
         self.C=self.C.get()
         self.D=self.D.get()
-        p.next1()
+        self.d=dict()
+        self.d[self.A]=[self.A_c.get(),self.A_s.get()]
+        self.d[self.B]=[self.B_c.get(),self.B_s.get()]
+        self.d[self.C]=[self.C_c.get(),self.C_s.get()]
+        self.d[self.D]=[self.D_c.get(),self.D_s.get()]
+        self.main.destroy()
     def changed_Flag(self):
-        pass
-'''
-функция обрабатывающая флаг стех смесь
-'''
-class prog:
-    def __init__(self):
-        self.inter1=IF()
-    def next1(self):
-        d=dict()
-        d[self.inter1.A]=[self.inter1.A_c.get(),self.inter1.A_s.get()]
-        d[self.inter1.B]=[self.inter1.B_c.get(),self.inter1.B_s.get()]
-        d[self.inter1.C]=[self.inter1.C_c.get(),self.inter1.C_s.get()]
-        d[self.inter1.D]=[self.inter1.D_c.get(),self.inter1.D_s.get()]
-        self.inter1.main.destroy()
-        print(d)
+        pass   
+    def run(self):
+        self.main.mainloop()
         
-p=prog()      
-tk.mainloop()
