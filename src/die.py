@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-
+import json
 class windowIn:
     def __init__(self):  
         self.main=tk.Tk() 
@@ -70,13 +70,14 @@ class windowIn:
         self.C=self.C.get()
         self.D=self.D.get()
         self.d=dict()
-        self.d[self.A]=[self.A_c.get(),self.A_s.get()]
-        self.d[self.B]=[self.B_c.get(),self.B_s.get()]
-        self.d[self.C]=[self.C_c.get(),self.C_s.get()]
-        self.d[self.D]=[self.D_c.get(),self.D_s.get()]
+        self.d[self.A]=[float(self.A_c.get()),self.A_s.get()]
+        self.d[self.B]=[float(self.B_c.get()),self.B_s.get()]
+        self.d[self.C]=[float(self.C_c.get()),self.C_s.get()]
+        self.d[self.D]=[float(self.D_c.get()),self.D_s.get()]
         self.main.destroy()
+        with open("cashew.json","w") as f:
+            json.dump(self.d,f)
     def changed_Flag(self):
         pass   
     def run(self):
         self.main.mainloop()
-        
