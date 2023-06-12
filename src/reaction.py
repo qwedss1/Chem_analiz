@@ -38,7 +38,7 @@ class Reaction:
                     Label(end, text="Введите температуру", font=tkFont.Font(size=16)).pack()
                     e = Entry(end)
                     e.pack()
-                    var = StringVar(value="C")
+                    var = StringVar(value="K")
                     Radiobutton(end, text="K", variable=var, value="K").pack(side=LEFT)
                     Radiobutton(end, text="C", variable=var, value="C").pack(side=LEFT)
                     Button(end, text="OK", font=tkFont.Font(size=16), command=lambda: self.save_info_and_die(e, var)).pack(side=BOTTOM)
@@ -54,8 +54,8 @@ class Reaction:
             if e.get() == "" or not e.get().isnumeric():
                 raise Err("Неверная температура!")
             else:
-                if var == StringVar(value="K"):
-                    self.R["T"] = float(e.get)
+                if var.get() == "K":
+                    self.R["T"] = float(e.get())
                 else:
                     self.R["T"] = float(e.get()) + 273
                 if os.path.exists("Reactions"):
@@ -179,14 +179,6 @@ class Reaction:
 
     def run(self):
         self.win.mainloop()
-
-    def err(self, *args):
-        er = Toplevel(self.win)
-        er.title("Ошибка")
-        Label(er, text="ОШИБКА!").pack(fill=BOTH, expand=True)
-        if args:
-            Label(er, text=str(args)).pack(fill=BOTH, expand=True)
-        Button(er, text="OK", command=lambda: er.destroy()).pack(fill=BOTH, expand=True)
 
 
 class Err(ValueError):
