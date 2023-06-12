@@ -10,9 +10,29 @@ class solve:
         self.reag = self.reac.value("R")
         self.prod = self.reac.value("P")
         self.temp = self.reac.value("T")
-    def H (self,formula,t):
+
+    def H(self,formula,t):
+        T =[]
         conn = sq.connect('db.db')
         cur = conn.cursor()
+        a = f"SELECT Tmax FROM therdb WHERE formula='{formula}'"
+        cur.execute(a)
+        b = int(cur.fetchone()[0])
+        a = f"SELECT ndH FROM therdb WHERE formula='{formula}'"
+        cur.execute(a)
+        c = int(cur.fetchone()[0])
+        for n in range(1, c+1):
+            a = f"SELECT t{n} FROM therdb WHERE formula='{formula}'"
+            cur.execute(a)
+            l = cur.fetchone()[0]
+            T.append(l)
+            if l>t:
+                break
+        for n in range(1,len(T)):
+            a = f"SELECT a{n},b{n},c{n},d{n},e{n},f{n} FROM therdb WHERE formula='{formula}'"
+            cur.execute(a)
+            HT = self.dHT(cur.fetchone(),T[n])
+
 
 
     def dHT(self,coefs,t):
