@@ -1,8 +1,8 @@
 import openpyxl as ox
 import sqlite3 as sq
-conn = sq.connect('../../db.db')
+conn = sq.connect('../db.db')
 cur = conn.cursor()
-wb = ox.load_workbook('../../FREED 11.0.xlsm')
+wb = ox.load_workbook('../FREED 11.0.xlsm')
 sh = wb['Database']
 ddH = [[0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0],
        [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0],
