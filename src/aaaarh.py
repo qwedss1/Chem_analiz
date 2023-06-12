@@ -10,6 +10,10 @@ class solve:
         self.reag = self.reac.value("R")
         self.prod = self.reac.value("P")
         self.temp = self.reac.value("T")
+    def H (self,formula,t):
+        conn = sq.connect('db.db')
+        cur = conn.cursor()
+
 
     def dHT(self,coefs,t):
         T=t
