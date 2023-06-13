@@ -10,7 +10,8 @@ class solve:
         self.reag = self.reac.value("R")
         self.prod = self.reac.value("P")
         self.temp = self.reac.value("T")
-
+        for n in range(0,len(self.reag)):
+            
     def H(self,formula,t):
         T = []
         conn = sq.connect('db.db')
