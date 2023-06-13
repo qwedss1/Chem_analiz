@@ -35,7 +35,7 @@ class Reaction:
         self.run()
 
     def __delete__(self):
-        self.delitter.menu()
+        self.delitter.data()
 
     def readyness(self):
         try:

@@ -4,9 +4,12 @@ from start import *
 
 class Initiation:
     def __init__(self):
+        self.p = None
+        self.s = None
+        self.d = None
         self.menu()
 
-    def cleanup(self,untouch):
+    def cleanup(self, untouch):
         if self.s and untouch != self.s:
             del self.s
         if self.p and untouch != self.p:
@@ -18,10 +21,11 @@ class Initiation:
         self.s=start(self)
         self.cleanup(self.s)
 
-    def stage2(self):
+    def reaction(self):
         self.p = Reaction(self)
         self.cleanup(self.p)
-    def stage3(self):
+
+    def data(self):
         self.d = Data()
         self.cleanup(self.d)
 
