@@ -4,14 +4,20 @@ import sympy as sp
 import math
 class solve:
     def __init__(self,number):
+        conn = sq.connect('db.db')
+        cur = conn.cursor()
         a = "Reactions/Reaction"+str(number)+"React.json"
         with open(a,"r") as file:
             self.reac = json.load(file)
         self.reag = self.reac.value("R")
         self.prod = self.reac.value("P")
         self.temp = self.reac.value("T")
+        self.dH = 0
         for n in range(0,len(self.reag)):
-            
+            self.dH = self.dH - self.H(self.reag[n],self.temp)
+        for n in range(0,len(self.prod)):
+            self.dH = self.dH + self.H(self.prod[n],self.temp)
+
     def H(self,formula,t):
         T = []
         conn = sq.connect('db.db')
