@@ -9,24 +9,34 @@ import os
 class solve:
     def __init__(self, number):
         self.number = number
-        a = "Reactions/Reaction"+str(number)+"React.json"
+        a = "Reactions/Reaction"+str(number)+"/React.json"
         with open(a, "r") as file:
             self.reac = json.load(file)
-        self.reag = self.reac.value("R")
-        self.prod = self.reac.value("P")
-        self.temp = self.reac.value("T")
+        self.reag = self.reac["R"]
+        self.prod = self.reac["P"]
+        self.temp = self.reac["T"]
         self.dH = 0
         self.dG = 0
         self.reaction, self.coefs = self.balance(self.reag, self.prod)
 
         for n in range(0,len(self.reag)):
-            self.dH = self.dH - self.coefs[0][n]*self.H(self.reag[n],self.temp)
+            conn = sq.connect('db.db')
+            cur = conn.cursor()
+            a = f"SELECT dH FROM therdb WHERE formula='{self.reag[n][0]}'"
+            cur.execute(a)
+            l = cur.fetchone()
+            self.dH -= self.coefs[0][n]*(self.H(self.reag[n][0],self.temp)+float(l[0]))
         for n in range(0,len(self.prod)):
-            self.dH = self.dH + self.coefs[1][n]*self.H(self.prod[n],self.temp)
+            conn = sq.connect('db.db')
+            cur = conn.cursor()
+            a = f"SELECT dH FROM therdb WHERE formula='{self.reag[n][0]}'"
+            cur.execute(a)
+            l = cur.fetchone()
+            self.dH += self.coefs[1][n]*(self.H(self.prod[n][0],self.temp)+float(l[0]))
         for n in range(0,len(self.reag)):
-            self.dG = self.dG - self.coefs[0][n]*self.G(self.reag[n],self.temp)
+            self.dG -= self.coefs[0][n]*self.G(self.reag[n][0],self.temp)
         for n in range(0,len(self.prod)):
-            self.dG = self.dG + self.coefs[1][n]*self.G(self.prod[n],self.temp)
+            self.dG += self.coefs[1][n]*self.G(self.prod[n][0],self.temp)
         self.dS = (self.dH-self.dG)/self.temp
         self.Calcu()
     def H(self,formula,t):
@@ -40,7 +50,7 @@ class solve:
         cur.execute(a)
         c = int(cur.fetchone()[0])
         for n in range(1, c + 1):
-            a = f"SELECT t{n} FROM therdb WHERE formula='Ag'"
+            a = f"SELECT t{n} FROM therdb WHERE formula='{formula}'"
             cur.execute(a)
             l = cur.fetchone()[0]
             T.append(l)
@@ -51,6 +61,32 @@ class solve:
         cur.execute(a)
         HT = self.dHT(cur.fetchone(),t)
         return HT
+    def G(self,formula,t):
+        T = []
+        conn = sq.connect('db.db')
+        cur = conn.cursor()
+        a = f"SELECT Tmax FROM therdb WHERE formula='{formula}'"
+        cur.execute(a)
+        b = int(cur.fetchone()[0])
+        a = f"SELECT ndG FROM therdb WHERE formula='{formula}'"
+        cur.execute(a)
+        c = int(cur.fetchone()[0])
+        if c != 0:
+            for n in range(1, c + 1):
+                a = f"SELECT TA{n} FROM therdb WHERE formula='{formula}'"
+                cur.execute(a)
+                l = cur.fetchone()[0]
+                T.append(l)
+                if l > t:
+                    break
+            n = len(T)
+            a = f"SELECT AA{n},BA{n},CA{n},DA{n},EA{n},FA{n},GA{n} FROM therdb WHERE formula='{formula}'"
+            cur.execute(a)
+            b =cur.fetchone()
+            GT = self.dGT(b,t)
+        else:
+            GT=0
+        return GT
 
     def dHT(self,coefs,t):
         T=t
@@ -67,20 +103,31 @@ class solve:
         onlyprod = []
         for n in range(0, len(prod)):
             onlyprod.append(prod[n][0])
-        print(onlyreag, onlyprod)
         dirtreag, dirtprod = cp.balance_stoichiometry(onlyreag, onlyprod)
-        print(dirtreag, dirtprod)
         reaction = ""
         for n in range(0, len(reag)):
-            if dirtreag[f"{reag[n][0]}"] != 1:
-                reaction = reaction + str(dirtreag[f"{reag[n][0]}"]) + f"{reag[n][0]}"
+            if n != len(reag) - 1:
+                if dirtreag[f"{reag[n][0]}"] != 1:
+                    reaction = reaction + str(dirtreag[f"{reag[n][0]}"]) + f"{reag[n][0]}"+" + "
+                else:
+                    reaction = reaction + f"{reag[n][0]}"+" + "
             else:
-                reaction = reaction + f"{reag[n][0]}"
+                if dirtreag[f"{reag[n][0]}"] != 1:
+                    reaction = reaction + str(dirtreag[f"{reag[n][0]}"]) + f"{reag[n][0]}"
+                else:
+                    reaction = reaction + f"{reag[n][0]}"
+        reaction = reaction + " = "
         for n in range(0, len(prod)):
-            if dirtprod[f"{prod[n][0]}"] != 1:
-                reaction = reaction + str(dirtprod[f"{prod[n][0]}"]) + f"{prod[n][0]}"
+            if n != len(prod)-1:
+                if dirtprod[f"{prod[n][0]}"] != 1:
+                    reaction = reaction + str(dirtprod[f"{prod[n][0]}"]) + f"{prod[n][0]}"+" + "
+                else:
+                    reaction = reaction + f"{prod[n][0]}"+" + "
             else:
-                reaction = reaction + f"{prod[n][0]}"
+                if dirtprod[f"{prod[n][0]}"] != 1:
+                    reaction = reaction + str(dirtprod[f"{prod[n][0]}"]) + f"{prod[n][0]}"
+                else:
+                    reaction = reaction + f"{prod[n][0]}"
         cre = []
         for n in range(0, len(reag)):
             cre.append(dirtreag[f"{reag[n][0]}"])
@@ -90,9 +137,9 @@ class solve:
         coefs = [cre, cpr]
         return reaction, coefs
     def Calcu(self):
-        a = {"Reaction":f"{self.reaction}","dH":self.dH,"dG":self.dG,"dS":self.dS}
-        b = "Reactions/Reaction" + self.number
-        os.mkdir(b)
-        b += "/" + "Calcu.json"
+        a = {"Reaction":f"{self.reaction}","dH":str(self.dH),"dG":str(self.dG),"dS":str(self.dS)}
+        b = "Reactions/Reaction" + str(self.number)+ "/Calcu.json"
         with open(b, "a") as f:
-            json.dump(self.a, f)
+            json.dump(a, f)
+
+a = solve(1)

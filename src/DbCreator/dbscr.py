@@ -30,7 +30,6 @@ for m in range(3, 2451):
     if sh.cell(column=1, row=m).value in elems:
         continue
     elems.append(sh.cell(column=1, row=m).value)
-    '''проверка на оригинальность'''
     formula = sh.cell(column=1, row=m).value
     gfw = float(sh.cell(column=5, row=m).value)
     dH = float(sh.cell(column=7, row=m).value)
@@ -61,8 +60,7 @@ for m in range(3, 2451):
             x = 0
         if sh.cell(column=N, row=m).font.bold:
             break
-        else:
-            N = N + 1
+        N = N + 1
     if ndG != 0:
         x = 0
         y = 0
@@ -88,10 +86,9 @@ for m in range(3, 2451):
             if x == 8:
                 y = y + 1
                 x = 0
-            if sh.cell(column=N, row=m).font.bold:
-                break
-            else:
-                N = N + 1
+                if sh.cell(column=N, row=m).font.bold:
+                    break
+            N = N + 1
     a1 = ddH[0][0]
     b1 = ddH[0][1]
     c1 = ddH[0][2]
@@ -279,12 +276,7 @@ for m in range(3, 2451):
     cur.execute("INSERT INTO therdb (formula,gfw,dH,dS,Tmax,ndH,ndG,a1,b1,c1,d1,e1,f1,t1,q1,a2,b2,c2,d2,e2,f2,t2,q2,a3,b3,c3,d3,e3,f3,t3,q3,a4,b4,c4,d4,e4,f4,t4,q4,a5,b5,c5,d5,e5,f5,t5,q5,a6,b6,c6,d6,e6,f6,t6,q6,a7,b7,c7,d7,e7,f7,t7,q7,a8,b8,c8,d8,e8,f8,t8,q8,a9,b9,c9,d9,e9,f9,t9,q9,AA1,BA1,CA1,DA1,EA1,FA1,GA1,TA1,AA2,BA2,CA2,DA2,EA2,FA2,GA2,TA2,AA3,BA3,CA3,DA3,EA3,FA3,GA3,TA3,AA4,BA4,CA4,DA4,EA4,FA4,GA4,TA4,AA5,BA5,CA5,DA5,EA5,FA5,GA5,TA5,AA6,BA6,CA6,DA6,EA6,FA6,GA6,TA6,AA7,BA7,CA7,DA7,EA7,FA7,GA7,TA7,AA8,BA8,CA8,DA8,EA8,FA8,GA8,TA8,AA9,BA9,CA9,DA9,EA9,FA9,GA9,TA9,AA10,BA10,CA10,DA10,EA10,FA10,GA10,TA10,AA11,BA11,CA11,DA11,EA11,FA11,GA11,TA11,AA12,BA12,CA12,DA12,EA12,FA12,GA12,TA12,AA13,BA13,CA13,DA13,EA13,FA13,GA13,TA13,AA14,BA14,CA14,DA14,EA14,FA14,GA14,TA14) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",(formula,gfw,dH,dS,Tmax,ndH,ndG,a1,b1,c1,d1,e1,f1,t1,q1,a2,b2,c2,d2,e2,f2,t2,q2,a3,b3,c3,d3,e3,f3,t3,q3,a4,b4,c4,d4,e4,f4,t4,q4,a5,b5,c5,d5,e5,f5,t5,q5,a6,b6,c6,d6,e6,f6,t6,q6,a7,b7,c7,d7,e7,f7,t7,q7,a8,b8,c8,d8,e8,f8,t8,q8,a9,b9,c9,d9,e9,f9,t9,q9,AA1,BA1,CA1,DA1,EA1,FA1,GA1,TA1,AA2,BA2,CA2,DA2,EA2,FA2,GA2,TA2,AA3,BA3,CA3,DA3,EA3,FA3,GA3,TA3,AA4,BA4,CA4,DA4,EA4,FA4,GA4,TA4,AA5,BA5,CA5,DA5,EA5,FA5,GA5,TA5,AA6,BA6,CA6,DA6,EA6,FA6,GA6,TA6,AA7,BA7,CA7,DA7,EA7,FA7,GA7,TA7,AA8,BA8,CA8,DA8,EA8,FA8,GA8,TA8,AA9,BA9,CA9,DA9,EA9,FA9,GA9,TA9,AA10,BA10,CA10,DA10,EA10,FA10,GA10,TA10,AA11,BA11,CA11,DA11,EA11,FA11,GA11,TA11,AA12,BA12,CA12,DA12,EA12,FA12,GA12,TA12,AA13,BA13,CA13,DA13,EA13,FA13,GA13,TA13,AA14,BA14,CA14,DA14,EA14,FA14,GA14,TA14))
     x = 0
     y = 0
-    ddH = [[0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0],
-           [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0],
-           [0, 0, 0, 0, 0, 0, 0, 0]]
-    ddG = [[0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0],
-           [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0],
-           [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0],
-           [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0]]
+    ddH = [[None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None],[None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None]]
+    ddG = [[None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None],[None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None],[None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None],[None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None]]
 conn.commit()
 conn.close()
