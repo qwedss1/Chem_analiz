@@ -9,23 +9,33 @@ class Reaction:
     val = ["Gas", "Solid", "Liquid"]
     R = {"R": [], "P": []}
 
-    def __init__(self):
+    def __init__(self,a):
+        self.delitter = a
         self.win = Tk()
         self.win.geometry("1000x220")
         self.win.maxsize(1200, 220)
         self.win.minsize(800, 220)
         self.win.title("Reaction")
+        self.win.iconbitmap("icon.ico")
+        self.win.configure(background="gray")
+        Label(self.win, height=1,background="gray").pack()
         self.Reaction = Label(self.win, text=" Здесь появится реакция ", font=tkFont.Font(size=22))
         self.Reaction.pack()
         b1 = Button(self.win, text="Добавить реагент", command=lambda: self.add_compound("R"), width=15, height=2, font=tkFont.Font(size=16))
         b2 = Button(self.win, text="Добавить продукт", command=lambda: self.add_compound("P"), width=15, height=2, font=tkFont.Font(size=16))
         b3 = Button(self.win, text="Изменение/удаление", command=self.edit, width=20, height=2, font=tkFont.Font(size=16))
         b4 = Button(self.win, text="Рассчёт", width=20, height=2, command=self.readyness, font=tkFont.Font(size=16))
+        Label(self.win, height=1,width=10, background="gray").pack(side=LEFT)
+        Label(self.win, height=1,width=10, background="gray").pack(side=RIGHT)
+        Label(self.win, height=1, background="gray").pack()
         b1.pack(side=LEFT)
         b2.pack(side=RIGHT)
         b3.pack(side=BOTTOM)
         b4.pack(side=BOTTOM)
         self.run()
+
+    def __delete__(self):
+        self.delitter.menu()
 
     def readyness(self):
         try:
