@@ -3,7 +3,7 @@ from tkinter import ttk
 import tkinter.font as tkFont
 import json
 import os
-
+import sqlite3 as sq
 
 class Reaction:
     val = ["Gas", "Solid", "Liquid"]
@@ -58,18 +58,41 @@ class Reaction:
                     self.R["T"] = float(e.get())
                 else:
                     self.R["T"] = float(e.get()) + 273
-                if os.path.exists("Reactions"):
-                    pass
+                if not self.check(self.R):
+                    raise Err("Температура не поддерживается", self.win)
                 else:
-                    os.mkdir("Reactions")
-                a = "Reactions/Reaction" + self.get_num_reaction()
-                os.mkdir(a)
-                a += "/" + "React.json"
-                with open(a, "a") as f:
-                    json.dump(self.R, f)
-                self.win.destroy()
+                    if os.path.exists("Reactions"):
+                        pass
+                    else:
+                        os.mkdir("Reactions")
+                    a = "Reactions/Reaction" + self.get_num_reaction()
+                    os.mkdir(a)
+                    a += "/" + "React.json"
+                    with open(a, "a") as f:
+                        json.dump(self.R, f)
+                    self.win.destroy()
         except Err:
             pass
+
+    def check(self, R):
+        state = True
+        conn = sq.connect('db.db')
+        cur = conn.cursor()
+        for n in range(0, len(R["R"])):
+            a = "SELECT Tmax FROM therdb WHERE formula='" + str(R["R"][n][0]) + "'"
+            cur.execute(a)
+            b = int(cur.fetchone()[0])
+            if b < R["T"]:
+                state = False
+                break
+        for n in range(0, len(R["P"])):
+            a = "SELECT Tmax FROM therdb WHERE formula='" + str(R["P"][n][0]) + "'"
+            cur.execute(a)
+            b = int(cur.fetchone()[0])
+            if b < R["T"]:
+                state = False
+                break
+        return state
 
     def is_latin(self,text):
         for char in text:
