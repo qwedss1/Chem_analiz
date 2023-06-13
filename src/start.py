@@ -40,6 +40,20 @@ class start:
         com=ttk.Combobox(h, state="readonly",values=self.finder())
         com.current(0)
         com.pack()
+        Button(h, text="Просмотреть информацию", command=lambda: self.save_info_and_die(com)).pack()
+
+    def save_info_and_die(self,com):
+        F=0
+        for key, value in self.djs.items():
+            if com.get()==str(value):
+                F=self.remove_non_numbers(key)
+                break
+        self.a.data(F)
+        self.root.destroy()
+        self.a.del_me(self)
+
+    def remove_non_numbers(self,input):
+        return ''.join(filter(str.isdigit, input))
 
     def finder(self):
         li = self.get_file_paths()
@@ -51,13 +65,14 @@ class start:
         for x in li:
             x = self.convert_path(x)
             li1.append(x)
-        print(li1)
         for x in li1:
-            with open(x, "a") as f:
-                print(x)
-                djs[x] = json.load(f)["Reaction"]
+            with open(x, "r") as f:
+                djs[x] = str(json.load(f)["Reaction"])
         self.djs = djs
-        return list[djs.values()]
+        ans=[]
+        for key, value in djs.items():
+            ans.append(value)
+        return ans
 
     def get_file_paths(self):
         file_paths = []
