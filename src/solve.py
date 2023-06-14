@@ -41,6 +41,7 @@ class solve:
         self.Calcu()
     def H(self,formula,t):
         T = []
+        print(formula)
         conn = sq.connect('db.db')
         cur = conn.cursor()
         a = f"SELECT Tmax FROM therdb WHERE formula='{formula}'"
@@ -90,6 +91,7 @@ class solve:
 
     def dHT(self,coefs,t):
         T=t
+        print(coefs,t)
         a = coefs[0]*T+coefs[1]*T*T+coefs[2]/T+coefs[3]*math.sqrt(T)+coefs[4]*T*T*T+coefs[5]
         return a
     def dGT(self,coefs,t):
