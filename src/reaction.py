@@ -194,9 +194,12 @@ class Reaction:
         try:
             if e.get() != "":
                 if any(letter.isupper() for letter in e.get()) and self.is_latin(e.get()) and e.get()[0].isupper():
-                    self.R[rtype].append((e.get(), com.get()))
-                    adr.destroy()
-                    self.change_reaction()
+                    if self.is_compound(e.get()):
+                        self.R[rtype].append((e.get(), com.get()))
+                        adr.destroy()
+                        self.change_reaction()
+                    else:
+                        raise Err(f"Элемента {e.get()} в базе нету!", self.win)
                 else:
                     raise Err("Неверный формат ввода!", self.win)
             else:
@@ -206,6 +209,18 @@ class Reaction:
         else:
             if more:
                 self.add_compound(rtype)
+
+    def is_compound(self,brutto):
+        conn = sq.connect('db.db')
+        cur = conn.cursor()
+        a = f"SELECT formula FROM therdb WHERE formula='{brutto}'"
+        cur.execute(a)
+        b = cur.fetchone()
+        if (b != None):
+            return True
+        else:
+            return False
+
 
     def change_reaction(self):
         answ = str()
@@ -232,3 +247,4 @@ class Err(ValueError):
         if args:
             Label(er, text=str(args[0])).pack(fill=BOTH, expand=True)
         Button(er, text="OK", command=lambda: er.destroy()).pack(fill=BOTH, expand=True)
+
