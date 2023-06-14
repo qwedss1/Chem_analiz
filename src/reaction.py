@@ -178,6 +178,8 @@ class Reaction:
     def add_compound(self, tp):
         adr = Toplevel(self.win)
         adr.geometry("400x100")
+        adr.minsize(400, 100)
+        adr.maxsize(400, 100)
         adr.title("Добавить")
         adr.grab_set()
         eadr = Entry(adr, width=20)
