@@ -141,5 +141,5 @@ class solve:
     def Calcu(self):
         a = {"Reaction":f"{self.reaction}","dH":str(self.dH),"dG":str(self.dG),"dS":str(self.dS)}
         b = "Reactions/Reaction" + str(self.number)+ "/Calcu.json"
-        with open(b, "a") as f:
+        with open(b, "w") as f:
             json.dump(a, f)

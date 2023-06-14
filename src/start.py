@@ -74,14 +74,11 @@ class start:
                 for x in l:
                     if "Calcu.json" in x:
                         with open(x, "r") as f:
-                            dj[x] = json.load(f)
-                self.dj = dj
+                            dj[x] = json.load(f)["Reaction"]
+                self.djs = dj
                 return list(dj.values())
         except :
             pass
-
-
-
 
     def get_file_paths(self):
         file_paths = []
