@@ -29,7 +29,7 @@ class solve:
         for n in range(0,len(self.prod)):
             conn = sq.connect('db.db')
             cur = conn.cursor()
-            a = f"SELECT dH FROM therdb WHERE formula='{self.reag[n][0]}'"
+            a = f"SELECT dH FROM therdb WHERE formula='{self.prod[n][0]}'"
             cur.execute(a)
             l = cur.fetchone()
             self.dH += self.coefs[1][n]*(self.H(self.prod[n][0],self.temp)+float(l[0]))
