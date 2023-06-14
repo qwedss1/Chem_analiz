@@ -8,7 +8,7 @@ class start:
     height_label=3
 
     def __init__(self,a):
-        self.a=a
+        self.Init=a
         self.root=Tk()
         self.root.geometry("500x800")
         self.root.minsize(500, 800)
@@ -28,16 +28,16 @@ class start:
 
     def react(self):
         self.root.destroy()
-        self.a.reaction()
+        self.Init.reaction()
 
     def history(self):
         h=Toplevel(self.root)
         h.grab_set()
-        h.geometry("200x200")
+        h.geometry("400x200")
         h.minsize(200, 200)
-        h.maxsize(200, 200)
+        h.maxsize(400, 200)
         h.title("История")
-        com=ttk.Combobox(h, state="readonly",values=self.finder())
+        com=ttk.Combobox(h, state="readonly",values=self.finder(), width=50)
         com.current(0)
         com.pack()
         Button(h, text="Просмотреть информацию", command=lambda: self.save_info_and_die(com)).pack()
@@ -48,9 +48,12 @@ class start:
             if com.get()==str(value):
                 F=self.remove_non_numbers(key)
                 break
-        self.a.data(F)
         self.root.destroy()
-        self.a.del_me(self)
+        self.Init.data(F)
+        self.del_me()
+
+    def del_me(self):
+        del self
 
     def remove_non_numbers(self,input):
         return ''.join(filter(str.isdigit, input))

@@ -10,7 +10,7 @@ class Reaction:
     R = {"R": [], "P": []}
 
     def __init__(self,a):
-        self.delitter = a
+        self.Init = a
         self.win = Tk()
         self.win.geometry("1000x220")
         self.win.maxsize(1200, 220)
@@ -24,7 +24,7 @@ class Reaction:
         b1 = Button(self.win, text="Добавить реагент", command=lambda: self.add_compound("R"), width=15, height=2, font=tkFont.Font(size=16))
         b2 = Button(self.win, text="Добавить продукт", command=lambda: self.add_compound("P"), width=15, height=2, font=tkFont.Font(size=16))
         b3 = Button(self.win, text="Изменение/удаление", command=self.edit, width=20, height=2, font=tkFont.Font(size=16))
-        b4 = Button(self.win, text="Рассчёт", width=20, height=2, command=self.readyness, font=tkFont.Font(size=16))
+        b4 = Button(self.win, text="Рассчёт", width=20, height=2, command=self.ready, font=tkFont.Font(size=16))
         Label(self.win, height=1,width=10, background="gray").pack(side=LEFT)
         Label(self.win, height=1,width=10, background="gray").pack(side=RIGHT)
         Label(self.win, height=1, background="gray").pack()
@@ -35,9 +35,9 @@ class Reaction:
         self.run()
 
     def __delete__(self):
-        self.delitter.data()
+        self.Init.data()
 
-    def readyness(self):
+    def ready(self):
         try:
             if self.Reaction.cget("text") != "" and self.Reaction.cget("text") != " Здесь появится реакция ":
                 if self.R["R"] != [] and self.R["P"] != []:
@@ -80,11 +80,14 @@ class Reaction:
                     a += "/" + "React.json"
                     with open(a, "a") as f:
                         json.dump(self.R, f)
-                    self.delitter.data(self.NADA)
                     self.win.destroy()
-                    self.delitter.del_me(self)
+                    self.Init.data(self.NADA)
+                    self.del_me()
         except Err:
             pass
+
+    def del_me(self):
+        del self
 
     def check(self, R):
         state = True

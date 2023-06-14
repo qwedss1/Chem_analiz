@@ -9,10 +9,6 @@ class Initiation:
         Initiation.menu()
 
     @staticmethod
-    def del_me(ad):
-        del ad
-
-    @staticmethod
     def menu():
         s = start(Initiation)
 
