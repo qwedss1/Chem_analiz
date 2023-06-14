@@ -3,6 +3,9 @@ from tkinter import ttk
 import tkinter.font as tkFont
 import os
 import json
+from reaction import Err
+import time as t
+
 
 class start:
     height_label=3
@@ -37,10 +40,13 @@ class start:
         h.minsize(200, 200)
         h.maxsize(400, 200)
         h.title("История")
-        com=ttk.Combobox(h, state="readonly",values=self.finder(), width=50)
-        com.current(0)
-        com.pack()
-        Button(h, text="Просмотреть информацию", command=lambda: self.save_info_and_die(com)).pack()
+        f=self.finder(h)
+        com=ttk.Combobox(h, state="readonly",values=f, width=50)
+        if f != None:
+            com.current(0)
+            com.pack()
+            Button(h, text="Просмотреть информацию", command=lambda: self.save_info_and_die(com)).pack()
+
 
     def save_info_and_die(self,com):
         F=0
@@ -58,24 +64,24 @@ class start:
     def remove_non_numbers(self,input):
         return ''.join(filter(str.isdigit, input))
 
-    def finder(self):
-        li = self.get_file_paths()
-        for x in li:
-            if "Calcu.json" not in x:
-                li.remove(x)
-        djs = {}
-        li1=[]
-        for x in li:
-            x = self.convert_path(x)
-            li1.append(x)
-        for x in li1:
-            with open(x, "r") as f:
-                djs[x] = str(json.load(f)["Reaction"])
-        self.djs = djs
-        ans=[]
-        for key, value in djs.items():
-            ans.append(value)
-        return ans
+    def finder(self,h):
+        dj = {}
+        l = self.get_file_paths()
+        try:
+            if l == []:
+                raise Err("Нет реакций",self.root)
+            else:
+                for x in l:
+                    if "Calcu.json" in x:
+                        with open(x, "r") as f:
+                            dj[x] = json.load(f)
+                self.dj = dj
+                return list(dj.values())
+        except :
+            pass
+
+
+
 
     def get_file_paths(self):
         file_paths = []
@@ -84,9 +90,6 @@ class start:
                 filepath = os.path.join(root, filename)
                 file_paths.append(filepath)
         return file_paths
-
-    def convert_path(self,path):
-        return path.replace('\\', '/')
 
     def run(self):
         self.root.mainloop()
