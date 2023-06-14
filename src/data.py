@@ -17,6 +17,6 @@ class Data:
     def mainwin_formation(self, a):
         l = Label(a, text="Проводим базовые рассчеты")
         l.pack()
-        t.sleep(1)
+        l.destroy()
     def run(self):
         self.root.mainloop()
