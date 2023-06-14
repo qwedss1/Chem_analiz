@@ -141,5 +141,3 @@ class solve:
         b = "Reactions/Reaction" + str(self.number)+ "/Calcu.json"
         with open(b, "a") as f:
             json.dump(a, f)
-
-a = solve(1)
