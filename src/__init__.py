@@ -2,28 +2,27 @@ from reaction import *
 from data import *
 from start import *
 
+
 class Initiation:
-    def __init__(self):
-        self.menu()
+    @staticmethod
+    def run():
+        Initiation.menu()
 
-    def cleanup(self,untouch):
-        if self.s and untouch != self.s:
-            del self.s
-        if self.p and untouch != self.p:
-            del self.s
-        if self.d and untouch != self.d:
-            del self.s
+    @staticmethod
+    def del_me(ad):
+        del ad
 
-    def menu(self):
-        self.s=start(self)
-        self.cleanup(self.s)
+    @staticmethod
+    def menu():
+        s = start(Initiation)
 
-    def stage2(self):
-        self.p = Reaction(self)
-        self.cleanup(self.p)
-    def stage3(self):
-        self.d = Data()
-        self.cleanup(self.d)
+    @staticmethod
+    def reaction():
+        p = Reaction(Initiation)
+
+    @staticmethod
+    def data(num):
+        d = Data(Initiation, num)
 
 
-i = Initiation()
+Initiation.run()

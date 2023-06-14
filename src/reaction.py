@@ -35,7 +35,7 @@ class Reaction:
         self.run()
 
     def __delete__(self):
-        self.delitter.menu()
+        self.delitter.data()
 
     def readyness(self):
         try:
@@ -80,7 +80,9 @@ class Reaction:
                     a += "/" + "React.json"
                     with open(a, "a") as f:
                         json.dump(self.R, f)
+                    self.delitter.data(self.NADA)
                     self.win.destroy()
+                    self.delitter.del_me(self)
         except Err:
             pass
 
@@ -123,6 +125,7 @@ class Reaction:
             d = [0]
             for x in files:
                 d.append(int(x[8:]))
+            self.NADA=max(d)+1
             return str(max(d)+1)
 
     def edit(self):
