@@ -43,7 +43,7 @@ class Data:
         with open(f"Reactions/Reaction{self.num}/React.json","r") as f:
             self.R=json.load(f)
         ad = Toplevel(self.root)
-        w,h=800,600
+        w,h=300,100
         ad.geometry(str(w)+"x"+str(h))
         ad.minsize(w,h)
         ad.maxsize(w,h)
@@ -56,7 +56,7 @@ class Data:
         var = StringVar(value="K")
         Radiobutton(ad, text="K", variable=var, value="K").pack(side=LEFT)
         Radiobutton(ad, text="C", variable=var, value="C").pack(side=LEFT)
-        Button(ad, text="Применить", command=lambda: self.changing(e, var, ad))
+        Button(ad, text="Применить", command=lambda: self.changing(e, var, ad)).pack()
 
     def changing(self, e, var, ad):
         try:
