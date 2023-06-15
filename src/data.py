@@ -43,20 +43,20 @@ class Data:
         with open(f"Reactions/Reaction{self.num}/React.json","r") as f:
             self.R=json.load(f)
         ad = Toplevel(self.root)
-        w,h=300,100
+        w,h=400,150
         ad.geometry(str(w)+"x"+str(h))
         ad.minsize(w,h)
         ad.maxsize(w,h)
         ad.title("Изменение температуры")
         ad.grab_set()
-        Label(ad, text=f"Текущая температура=> {self.s.temp}", font=tkFont.Font(size=20), justify="center").pack()
-        Label(ad, text="Введите новую температуру:", font=tkFont.Font(size=20), justify="center").pack()
-        e=Entry(ad, font=tkFont.Font(size=20), justify="center")
+        Label(ad, text=f"Текущая температура=> {self.s.temp}", font=tkFont.Font(size=16), justify="center").pack()
+        Label(ad, text="Введите новую температуру:", font=tkFont.Font(size=16), justify="center").pack()
+        e=Entry(ad, font=tkFont.Font(size=16), justify="center")
         e.pack(fill=X)
         var = StringVar(value="K")
         Radiobutton(ad, text="K", variable=var, value="K").pack(side=LEFT)
         Radiobutton(ad, text="C", variable=var, value="C").pack(side=LEFT)
-        Button(ad, text="Применить", command=lambda: self.changing(e, var, ad)).pack()
+        Button(ad, text="Применить",font=tkFont.Font(size=16) , command=lambda: self.changing(e, var, ad)).pack()
 
     def changing(self, e, var, ad):
         try:
@@ -74,9 +74,10 @@ class Data:
                         pass
                     else:
                         os.mkdir("Reactions")
-                    a = "Reactions/Reaction" + self.num
-                    os.mkdir(a)
-                    a += "/" + "React.json"
+                    a = "Reactions/Reaction" + self.num + "/React.json"
+                    b ="Reactions/Reaction" + self.num + "/Calcu.json"
+                    os.remove(b)
+                    os.remove(a)
                     with open(a, "w") as f:
                         json.dump(self.R, f)
                     ad.destroy()
