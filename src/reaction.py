@@ -4,6 +4,7 @@ import tkinter.font as tkFont
 import json
 import os
 import sqlite3 as sq
+import chempy as cp
 
 class Reaction:
     val = ["Gas", "Solid", "Liquid"]
@@ -41,17 +42,29 @@ class Reaction:
         try:
             if self.Reaction.cget("text") != "" and self.Reaction.cget("text") != " Здесь появится реакция ":
                 if self.R["R"] != [] and self.R["P"] != []:
-                    end = Toplevel(self.win)
-                    end.grab_set()
-                    end.geometry("300x100")
-                    end.title("Ввод окончен")
-                    Label(end, text="Введите температуру", font=tkFont.Font(size=16)).pack()
-                    e = Entry(end)
-                    e.pack()
-                    var = StringVar(value="K")
-                    Radiobutton(end, text="K", variable=var, value="K").pack(side=LEFT)
-                    Radiobutton(end, text="C", variable=var, value="C").pack(side=LEFT)
-                    Button(end, text="OK", font=tkFont.Font(size=16), command=lambda: self.save_info_and_die(e, var)).pack(side=BOTTOM)
+                    onlyreag = []
+                    for n in range(0, len(self.R["R"])):
+                        onlyreag.append(self.R["R"][n][0])
+                    onlyprod = []
+                    for n in range(0, len(self.R["P"])):
+                        onlyprod.append(self.R["P"][n][0])
+                    try:
+                        bal_eq = cp.balance_stoichiometry(onlyreag,onlyprod )
+                        print(bal_eq)
+                    except ValueError:
+                        raise Err("Реакцию невозможно уравнять!", self.win)
+                    else:
+                        end = Toplevel(self.win)
+                        end.grab_set()
+                        end.geometry("300x100")
+                        end.title("Ввод окончен")
+                        Label(end, text="Введите температуру", font=tkFont.Font(size=16)).pack()
+                        e = Entry(end)
+                        e.pack()
+                        var = StringVar(value="K")
+                        Radiobutton(end, text="K", variable=var, value="K" ).pack(side=LEFT)
+                        Radiobutton(end, text="C", variable=var, value="C").pack(side=LEFT)
+                        Button(end, text="OK", font=tkFont.Font(size=16), command=lambda: self.save_info_and_die(e, var)).pack(side=BOTTOM)
                 else:
                     raise Err("Мало данных!", self.win)
             else:
