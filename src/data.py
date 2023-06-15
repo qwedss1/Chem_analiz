@@ -106,13 +106,13 @@ class Data:
         return state
 
     def additional(self):
-        self.Init.moredata(self.num)
         self.root.destroy()
+        self.Init.moredata(self.num)
         self.del_me()
 
     def Menu(self):
-        self.Init.menu()
         self.root.destroy()
+        self.Init.menu()
         self.del_me()
 
     def del_me(self):
