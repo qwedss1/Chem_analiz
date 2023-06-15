@@ -1,6 +1,7 @@
 from reaction import *
 from data import *
 from start import *
+from moredata import *
 
 
 class Initiation:
@@ -19,6 +20,10 @@ class Initiation:
     @staticmethod
     def data(num):
         d = Data(Initiation, num)
+
+    @staticmethod
+    def moredata(num):
+        md = Moredata(Initiation, num)
 
 
 Initiation.run()
