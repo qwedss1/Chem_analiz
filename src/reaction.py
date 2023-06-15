@@ -90,7 +90,7 @@ class Reaction:
                     a = "Reactions/Reaction" + self.get_num_reaction()
                     os.mkdir(a)
                     a += "/" + "React.json"
-                    with open(a, "a") as f:
+                    with open(a, "w") as f:
                         json.dump(self.R, f)
                     self.win.destroy()
                     self.Init.data(self.NADA)
