@@ -49,8 +49,7 @@ class Reaction:
                     for n in range(0, len(self.R["P"])):
                         onlyprod.append(self.R["P"][n][0])
                     try:
-                        bal_eq = cp.balance_stoichiometry(onlyreag,onlyprod )
-                        print(bal_eq)
+                        bal_eq = cp.balance_stoichiometry(onlyreag,onlyprod)
                     except ValueError:
                         raise Err("Реакцию невозможно уравнять!", self.win)
                     else:
