@@ -26,6 +26,8 @@ class solve:
             cur.execute(a)
             l = cur.fetchone()
             self.dH -= self.coefs[0][n]*(self.H(self.reag[n][0],self.temp)+float(l[0]))
+
+
         for n in range(0,len(self.prod)):
             conn = sq.connect('db.db')
             cur = conn.cursor()
@@ -33,8 +35,12 @@ class solve:
             cur.execute(a)
             l = cur.fetchone()
             self.dH += self.coefs[1][n]*(self.H(self.prod[n][0],self.temp)+float(l[0]))
+
+
         for n in range(0,len(self.reag)):
             self.dG -= self.coefs[0][n]*self.G(self.reag[n][0],self.temp)
+
+
         for n in range(0,len(self.prod)):
             self.dG += self.coefs[1][n]*self.G(self.prod[n][0],self.temp)
         self.dS = (self.dH-self.dG)/self.temp
@@ -90,6 +96,7 @@ class solve:
 
     def dHT(self,coefs,t):
         T=t
+        print(coefs,t)
         a = coefs[0]*T+coefs[1]*T*T+coefs[2]/T+coefs[3]*math.sqrt(T)+coefs[4]*T*T*T+coefs[5]
         return a
     def dGT(self,coefs,t):
@@ -132,7 +139,7 @@ class solve:
         for n in range(0, len(reag)):
             cre.append(dirtreag[f"{reag[n][0]}"])
         cpr = []
-        for n in range(0, len(reag)):
+        for n in range(0, len(prod)):
             cpr.append(dirtprod[f"{prod[n][0]}"])
         coefs = [cre, cpr]
         return reaction, coefs

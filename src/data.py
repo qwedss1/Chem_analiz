@@ -30,7 +30,7 @@ class Data:
         Label(root, width=25, font=tkFont.Font(size=fontsize)).pack()
         Label(root, text=f"dGT={round(self.s.dG*4.184,3)} Дж", justify="center", font=tkFont.Font(size=fontsize), width=25).pack()
         Label(root, width=25, font=tkFont.Font(size=fontsize)).pack()
-        Label(root, text=f"dST={round(self.s.dS*4.184,3)} Дж", justify="center", font=tkFont.Font(size=fontsize), width=25).pack()
+        Label(root, text=f"dST={round(self.s.dS*4.184,3)} Дж/К", justify="center", font=tkFont.Font(size=fontsize), width=25).pack()
         Label(root, height=1, background="gray").pack()
         Button(text="Изменить температуру", command=self.change_T, font=tkFont.Font(size=fontsize-2), width=25, height=1, justify="center").pack()
         Button(text="Дополнительный рассчет", command=self.additional, font=tkFont.Font(size=fontsize-2), width=25, height=1, justify="center").pack()
