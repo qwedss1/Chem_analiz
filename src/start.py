@@ -38,11 +38,11 @@ class start:
         t.minsize(w, h)
         t.title("Информация для пользователя")
         with open("FAQ.txt","r") as f:
-            text = Text(value=f.read(), font=("Times New Roman", 16), height=6).pack(side=TOP, fill=X)
-            scroll = Scrollbar(command=text.yview)
+            text = Text(t, value=f.read(), font=("Times New Roman", 16), height=6).pack(side=TOP, fill=X)
+            scroll = Scrollbar(t, command=text.yview)
             scroll.pack(side=LEFT, fill=Y)
             text.config(yscrollcommand=scroll.set)
-        Button(text="OK", font=("Times New Roman", 18), command=t.destroy()).pack(side=BOTTOM, fill=X)
+        Button(t, text="OK", font=("Times New Roman", 18), command=t.destroy()).pack(side=BOTTOM, fill=X)
 
     def react(self):
         self.root.destroy()
