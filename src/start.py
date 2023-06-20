@@ -11,8 +11,8 @@ class start:
     height_label=3
 
     def __init__(self,a):
-        self.Init=a
-        self.root=Tk()
+        self.Init = a
+        self.root = Tk()
         self.root.geometry("500x800")
         self.root.minsize(500, 800)
         self.root.maxsize(500, 800)
@@ -24,10 +24,25 @@ class start:
         Label(self.root, height=self.height_label, background="gray").pack()
         Button(self.root, text="История реакций", height=5, width=20, relief="raised", font=tkFont.Font(size=16), command=self.history).pack()
         Label(self.root, height=self.height_label, background="gray").pack()
-        Button(self.root, text="FAQ", height=5, width=20, relief="raised", font=tkFont.Font(size=16)).pack()
+        Button(self.root, text="FAQ", height=5, width=20, relief="raised", font=tkFont.Font(size=16), command=self.faq).pack()
         Label(self.root, height=self.height_label, background="gray").pack()
         Button(self.root, text="Выход", height=5, width=20, relief="raised", font=tkFont.Font(size=16), command=self.root.destroy).pack()
         self.run()
+
+    def faq(self):
+        t = Toplevel(self.root)
+        t.grab_set()
+        w, h = 800, 800
+        t.geometry(f"{w}x{h}")
+        t.maxsize(w, h)
+        t.minsize(w, h)
+        t.title("Информация для пользователя")
+        with open("FAQ.txt","r") as f:
+            text = Text(value=f.read(), font=("Times New Roman", 16), height=6).pack(side=TOP, fill=X)
+            scroll = Scrollbar(command=text.yview)
+            scroll.pack(side=LEFT, fill=Y)
+            text.config(yscrollcommand=scroll.set)
+        Button(text="OK", font=("Times New Roman", 18), command=t.destroy()).pack(side=BOTTOM, fill=X)
 
     def react(self):
         self.root.destroy()
@@ -51,8 +66,8 @@ class start:
     def save_info_and_die(self,com):
         F=0
         for key, value in self.djs.items():
-            if com.get()==str(value):
-                F=self.remove_non_numbers(key)
+            if com.get() == str(value):
+                F = self.remove_non_numbers(key)
                 break
         self.root.destroy()
         self.Init.data(F)
