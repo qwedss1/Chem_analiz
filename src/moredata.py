@@ -1,12 +1,12 @@
 from tkinter import *
 import tkinter.font as tkFont
 import json
-
-#from moresolve import *
+from mmoresolve import ms
 
 class Moredata:
     def __init__(self,a,num):
         self.Init=a
+        self.num=num
         self.pathC=f"Reactions/Reaction{num}/Calcu.json"
         self.pathR = f"Reactions/Reaction{num}/React.json"
         self.make_root()
