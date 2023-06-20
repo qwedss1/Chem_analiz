@@ -4,15 +4,14 @@ import tkinter.font as tkFont
 import os
 import json
 from reaction import Err
-import time as t
 
 
 class start:
-    height_label=3
+    height_label = 3
 
-    def __init__(self,a):
-        self.Init=a
-        self.root=Tk()
+    def __init__(self, a):
+        self.Init = a
+        self.root = Tk()
         self.root.geometry("500x800")
         self.root.minsize(500, 800)
         self.root.maxsize(500, 800)
@@ -20,13 +19,13 @@ class start:
         self.root.iconbitmap("icon.ico")
         self.root.configure(background="gray")
         Label(self.root, height=self.height_label, background="gray").pack()
-        Button(self.root, text="Ввести новую реакцию", height=5, width=20, relief="raised", font=tkFont.Font(size=16), command=self.react).pack()
+        Button(self.root, text="Ввести новую реакцию", height=5, width=20, relief="raised", font=('Times New Roman', 16), command=self.react).pack()
         Label(self.root, height=self.height_label, background="gray").pack()
-        Button(self.root, text="История реакций", height=5, width=20, relief="raised", font=tkFont.Font(size=16), command=self.history).pack()
+        Button(self.root, text="История реакций", height=5, width=20, relief="raised", font=('Times New Roman', 16), command=self.history).pack()
         Label(self.root, height=self.height_label, background="gray").pack()
-        Button(self.root, text="FAQ", height=5, width=20, relief="raised", font=tkFont.Font(size=16)).pack()
+        Button(self.root, text="FAQ", height=5, width=20, relief="raised", font=('Times New Roman', 16)).pack()
         Label(self.root, height=self.height_label, background="gray").pack()
-        Button(self.root, text="Выход", height=5, width=20, relief="raised", font=tkFont.Font(size=16), command=self.root.destroy).pack()
+        Button(self.root, text="Выход", height=5, width=20, relief="raised", font=('Times New Roman', 16), command=self.root.destroy).pack()
         self.run()
 
     def react(self):
@@ -34,18 +33,20 @@ class start:
         self.Init.reaction()
 
     def history(self):
-        h=Toplevel(self.root)
+        h = Toplevel(self.root)
         h.grab_set()
-        h.geometry("400x200")
-        h.minsize(200, 200)
-        h.maxsize(400, 200)
+        w, f = 450, 100
+        h.geometry(f"{w}x{f}")
+        h.minsize(w, f)
+        h.maxsize(w, f)
         h.title("История")
-        f=self.finder(h)
-        com=ttk.Combobox(h, state="readonly",values=f, width=50)
-        if f != None:
+        f = self.finder(h)
+        com = ttk.Combobox(h, state="readonly",values=f, width=50, font=('Times New Roman', 20))
+        h.option_add("*TCombobox*Listbox*Font", tkFont.Font(family='Times New Roman', size=28))
+        if f:
             com.current(0)
             com.pack()
-            Button(h, text="Просмотреть информацию", command=lambda: self.save_info_and_die(com)).pack()
+            Button(h, text="Просмотреть информацию", command=lambda: self.save_info_and_die(com), font=tkFont.Font(size=16)).pack()
 
 
     def save_info_and_die(self,com):
@@ -80,7 +81,8 @@ class start:
         except :
             pass
 
-    def get_file_paths(self):
+    @staticmethod
+    def get_file_paths():
         file_paths = []
         for root, directories, files in os.walk("Reactions"):
             for filename in files:

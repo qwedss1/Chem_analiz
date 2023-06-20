@@ -2,6 +2,7 @@ from tkinter import *
 import tkinter.font as tkFont
 import json
 
+#from moresolve import *
 
 class Moredata:
     def __init__(self,a,num):
