@@ -1,11 +1,13 @@
 from tkinter import *
 import tkinter.font as tkFont
 import json
-from mmoresolve import ms
+from inter_addit import *
+
 
 class Moredata:
-    def __init__(self,a,num):
+    def __init__(self,a,num, t):
         self.Init=a
+        self.T=t
         self.num=num
         self.pathC=f"Reactions/Reaction{num}/Calcu.json"
         self.pathR = f"Reactions/Reaction{num}/React.json"
@@ -29,7 +31,7 @@ class Moredata:
             Label(root, text=f"Ваша реакция происходит с жидкостями", font=tkFont.Font(size=fs-2), justify="center").pack(fill=X)
             Label(root, text=f"можно рассчитать:",font=tkFont.Font(size=fs), justify="center").pack(fill=X)
             Label(root,bg="gray").pack()
-            Button(root, text="Энергия активации", font=tkFont.Font(size=fs)).pack(fill=X)
+            Button(root, text="Энергия активации", font=tkFont.Font(size=fs), command=lambda: self.Engac()).pack(fill=X)
             Button(root, text="Равновесные концентрации", font=tkFont.Font(size=fs)).pack(fill=X)
             Button(root, text="Константа равновесия", font=tkFont.Font(size=fs)).pack(fill=X)
         if self.is_state() == "G":
@@ -40,6 +42,8 @@ class Moredata:
             Button(root, text="Константа равновесия", font=tkFont.Font(size=fs)).pack(fill=X)
         Button(root, text="График LnK(T)", font=tkFont.Font(size=fs)).pack(fill=X)
 
+    def Engac(self):
+        o=OP(self.root, self.num, "engac",self.T , self.Init)
     #Диффренцируем реакции на газово-солидные и ликвидно-солидные
     def is_state(self):
         compounds=[]
