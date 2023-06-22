@@ -1,6 +1,4 @@
 chempy
 sympy
 numpy
-math
-json
-tkinter
+
