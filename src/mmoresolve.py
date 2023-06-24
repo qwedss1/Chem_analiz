@@ -8,8 +8,9 @@ class ms:
         Ea = (math.log(A)-math.log(k))*(ms.R*T)
         return Ea
     @staticmethod
-    def Kravn(Gt,T):
-        Kr = math.exp(-Gt/(ms.R*T))
+    def Kravn(num):
+        A = solvechem(num)
+        Kr = math.exp(-A.dG/(ms.R*A.temp))
         return Kr
     @staticmethod
     def EqMolLStech(num):
