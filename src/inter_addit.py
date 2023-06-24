@@ -11,7 +11,7 @@ class OP:
         elif code == "kravl":
             self.a = Krovl(num, 500, 100, root)
         elif code=="plotl":
-            self.a=Plotnik(num, 500, 100, root)
+            self.a=Plotnik(num, 500, 300, root)
 
 
 class Engac():
@@ -84,5 +84,5 @@ class Plotnik:
         Button(rt, text="Выход", command=lambda: rt.destroy(), font=("Times new roman", 25)).pack(side=BOTTOM)
 
     def Plot(self, rt, A0, num):
-        ms.graphik(A0, num)
+        ms.graphik(float(A0), num)
         rt.destroy()
