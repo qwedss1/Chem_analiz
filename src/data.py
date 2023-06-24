@@ -108,7 +108,7 @@ class Data:
 
     def additional(self):
         self.root.destroy()
-        self.Init.moredata(self.num)
+        self.Init.moredata(self.Init,self.num,self.s.temp)
         self.del_me()
 
     def Menu(self):
