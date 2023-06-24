@@ -48,7 +48,7 @@ class ms:
             ca = ca - A.coefs[0][n]
         for n in range(0, len(A.prod)):
             ca = ca + A.coefs[1][n]
-        eq = Eq(c*(P*(1-z)*(all+ca*z))**ca,ms.Kravn(A.dG,A.temp))
+        eq = Eq(c*(P*(1-z)*(all+ca*z))**ca,ms.Kravn(num))
         b = ms.returnz(solve(eq, z)[0], A)
         return b
     @staticmethod
