@@ -41,6 +41,11 @@ class Moredata:
             Button(root, text="Равновесные мольные доли", font=tkFont.Font(size=fs),command=lambda: self.doli()).pack(fill=X)
             Button(root, text="Константа равновесия", font=tkFont.Font(size=fs), command=lambda: self.kravl()).pack(fill=X)
         Button(root, text="График LnK(T)", font=tkFont.Font(size=fs), command=lambda: self.graph()).pack(fill=X)
+        Button(root, text="Меню", font=tkFont.Font(size=fs), command=lambda: self.menu() ).pack(fill=X)
+
+    def menu(self):
+        self.root.destroy()
+        self.Init.menu()
 
     def doli(self):
         o = OP(self.root, self.num, "doli", self.T, self.Init)
