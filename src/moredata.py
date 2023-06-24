@@ -32,7 +32,7 @@ class Moredata:
             Label(root, text=f"можно рассчитать:",font=tkFont.Font(size=fs), justify="center").pack(fill=X)
             Label(root,bg="gray").pack()
             Button(root, text="Энергия активации", font=tkFont.Font(size=fs), command=lambda: self.Engac()).pack(fill=X)
-            Button(root, text="Равновесные концентрации", font=tkFont.Font(size=fs)).pack(fill=X)
+            Button(root, text="Равновесные концентрации", font=tkFont.Font(size=fs), command=lambda: self.ravnl()).pack(fill=X)
             Button(root, text="Константа равновесия", font=tkFont.Font(size=fs)).pack(fill=X)
         if self.is_state() == "G":
             Label(root, text=f"Ваша реакция происходит с газами",font=tkFont.Font(size=fs), justify="center").pack(fill=X)
@@ -44,6 +44,9 @@ class Moredata:
 
     def Engac(self):
         o=OP(self.root, self.num, "engac", self.T, self.Init)
+
+    def ravnl(self):
+        o = OP(self.root, self.num, "ravl", self.T, self.Init)
 
     def is_state(self):
         compounds=[]
