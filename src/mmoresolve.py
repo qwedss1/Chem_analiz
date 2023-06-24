@@ -65,5 +65,5 @@ class ms:
         ch= solvechem(num)
         x = Symbol('x')
         eq = math.log(A) - ch.dG/(ms.R*x)
-        plot(eq,(x,298,500))
+        plot(eq,(x,298,600))
 
