@@ -74,8 +74,8 @@ class Data:
                         pass
                     else:
                         os.mkdir("Reactions")
-                    a = "Reactions/Reaction" + self.num + "/React.json"
-                    b ="Reactions/Reaction" + self.num + "/Calcu.json"
+                    a = "Reactions/Reaction" + str(self.num) + "/React.json"
+                    b ="Reactions/Reaction" + str(self.num) + "/Calcu.json"
                     os.remove(b)
                     os.remove(a)
                     with open(a, "w") as f:
