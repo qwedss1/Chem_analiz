@@ -17,7 +17,7 @@ class Engac():
         rt.minsize(w, h)
         rt.maxsize(w, h)
         Label(rt,text="Используйте форму записи 2.2*10^-20 = 2.2e-20", font=("Times new roman", 16)).pack()
-        Label(rt,text="k", font=("Times new roman", 16)).pack()
+        Label(rt,text=f"k при T={T}", font=("Times new roman", 16)).pack()
         k=Entry(rt,font=("Times new roman", 16))
         k.pack()
         Label(rt, text="A0",font=("Times new roman", 16)).pack()
