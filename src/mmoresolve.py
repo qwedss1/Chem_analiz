@@ -67,4 +67,3 @@ class ms:
         eq = math.log(A) - ch.dG/(ms.R*x)
         plot(eq,(x,298,500))
 
-A = ms.graphik(1e25,1)
