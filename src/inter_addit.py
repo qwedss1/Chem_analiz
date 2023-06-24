@@ -5,7 +5,7 @@ from tkinter import *
 class OP:
     def __init__(self,root, num, code, T, Init):
         if code=="engac":
-            self.a=Engac(T, Init, 500, 500, root)
+            self.a=Engac(T, Init, 500, 300, root)
 
 
 class Engac():
@@ -25,6 +25,7 @@ class Engac():
         A0.pack()
         l=Label(rt,font=("Times new roman", 16))
         Button(rt,font=("Times new roman", 16),text="Рассчёт", command=lambda: self.sol(l, T, k.get(), A0.get())).pack()
+        Label(rt, font=("Times new roman", 30)).pack()
         l.pack()
 
     def sol(self, l, T, k, A0):
