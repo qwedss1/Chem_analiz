@@ -22,8 +22,8 @@ class Initiation:
         d = Data(Initiation, num)
 
     @staticmethod
-    def moredata(num):
-        md = Moredata(Initiation, num)
+    def moredata(num,t):
+        md = Moredata(Initiation, num, t)
 
 
 Initiation.run()

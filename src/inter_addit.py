@@ -5,7 +5,7 @@ from tkinter import *
 class OP:
     def __init__(self,root, num, code, T, Init):
         if code=="engac":
-            self.a=Engac(T, Init, 200, 100, root)
+            self.a=Engac(T, Init, 500, 500, root)
 
 
 class MM:

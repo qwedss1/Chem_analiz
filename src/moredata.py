@@ -43,8 +43,8 @@ class Moredata:
         Button(root, text="График LnK(T)", font=tkFont.Font(size=fs)).pack(fill=X)
 
     def Engac(self):
-        o=OP(self.root, self.num, "engac",self.T , self.Init)
-    #Диффренцируем реакции на газово-солидные и ликвидно-солидные
+        o=OP(self.root, self.num, "engac", self.T, self.Init)
+
     def is_state(self):
         compounds=[]
         with open(self.pathR,"r") as f:
