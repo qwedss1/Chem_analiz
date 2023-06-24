@@ -5,9 +5,11 @@ from tkinter import *
 class OP:
     def __init__(self,root, num, code, T, Init):
         if code=="engac":
-            self.a=Engac(T, Init, 500, 300, root)
+            self.a = Engac(T, Init, 500, 300, root)
         elif code=="ravl":
-            self.a=AskSenya(num, 500, 300, root)
+            self.a = Ravnl(num, 500, 300, root)
+        elif code == "kravl":
+            self.a = Krovl(num, 500, 200, root)
 
 
 class Engac():
@@ -34,18 +36,29 @@ class Engac():
         l.config(text=f"Ea= {ms.engac(float(A0), float(k), float(T))}")
 
 
-class AskSenya:
+class Ravnl:
     def __init__(self, num, w, h, root):
         self.root = Toplevel(root)
         sen=ms.EqMolLStech(num)
         rt=self.root
-        rt.title("Энергия Активации")
+        rt.title("Равновесные моли стех смеси")
         rt.geometry(f"{w}x{h}")
         rt.minsize(w, h)
         rt.maxsize(w, h)
-        Label(rt, text=f"z={sen[0]}").pack()
+        fs=20
+        Label(rt, text=f"z={round(sen[0],3)}", font=("Times new roman", fs)).pack()
         print(sen)
         for x in sen[1]:
-            Label(rt, text=f"[{x[0]}]={x[1]}").pack()
-        Button(rt, text="OK", command=lambda: rt.destroy()).pack()
+            Label(rt, text=f"[{x[0]}]={round(x[1],3)}", font=("Times new roman", fs)).pack()
+        Button(rt, text="OK", command=lambda: rt.destroy(), font=("Times new roman", fs)).pack(side=BOTTOM)
 
+class Krovl:
+    def __init__(self, num, w, h, root):
+        self.root = Toplevel(root)
+        rt=self.root
+        rt.title("Равновесия константа")
+        rt.geometry(f"{w}x{h}")
+        rt.minsize(w, h)
+        rt.maxsize(w, h)
+        Label(rt, text=f"K={ms.Kravn(num)}", font=("Times new roman", 25)).pack()
+        Button(rt, text="OK", command=lambda: rt.destroy(), font=("Times new roman", 25)).pack(side=BOTTOM)
