@@ -1,11 +1,11 @@
 import math
-from sympy import Symbol,Eq
-import solve
+from sympy import Symbol,Eq, solve
+from solve import solve as solvechem
 class ms:
     R=8.31
     @staticmethod
     def engac(A,k,T):
-        Ea = (math.log(A)-math.log(k))/(ms.R*T)
+        Ea = (math.log(A)-math.log(k))*(ms.R*T)
         return Ea
     @staticmethod
     def Kravn(Gt,T):
@@ -13,7 +13,7 @@ class ms:
         return Kr
     @staticmethod
     def EqMolLStech(num):
-        A = solve(num)
+        A = solvechem(num)
         z = Symbol('z')
         c = 1
         ca = 0
@@ -26,9 +26,10 @@ class ms:
         for n in range(0, len(A.prod)):
             ca = ca + A.coefs[1][n]
         eqn = Eq(c*(1-z)**ca,ms.Kravn(A.dG,A.temp))
+        return solve(eqn,z)
     @staticmethod
     def EqMolGStech(num,P):
-        A = solve(num)
+        A = solvechem(num)
         all = 0
         z = Symbol('z')
         for n in range(0, len(A.reag)):
@@ -45,5 +46,5 @@ class ms:
             ca = ca - A.coefs[0][n]
         for n in range(0, len(A.prod)):
             ca = ca + A.coefs[1][n]
-        eq = Eq(c*(P*(1-z)*(all+ca*z))**ca)
-
+        eq = Eq(c*(P*(1-z)*(all+ca*z))**ca,ms.Kravn(A.dG,A.temp))
+        return solve(eq,z)
