@@ -40,10 +40,12 @@ class Moredata:
             Label(root, bg="gray").pack()
             Button(root, text="Равновесные мольные доли", font=tkFont.Font(size=fs)).pack(fill=X)
             Button(root, text="Константа равновесия", font=tkFont.Font(size=fs)).pack(fill=X)
-        Button(root, text="График LnK(T)", font=tkFont.Font(size=fs)).pack(fill=X)
+        Button(root, text="График LnK(T)", font=tkFont.Font(size=fs), command=lambda: self.graph()).pack(fill=X)
 
+    def graph(self):
+        o = OP(self.root, self.num, "plotl", self.T, self.Init)
     def Engac(self):
-        o=OP(self.root, self.num, "engac", self.T, self.Init)
+        o = OP(self.root, self.num, "engac", self.T, self.Init)
 
     def ravnl(self):
         o = OP(self.root, self.num, "ravl", self.T, self.Init)
