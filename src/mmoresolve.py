@@ -59,3 +59,12 @@ class ms:
         for n in range(0, len(A.prod)):
             a[1].append((A.prod[n][0],A.coefs[0][n]+z))
         return a
+
+    @staticmethod
+    def graphik(A,num):
+        ch= solvechem(num)
+        x = Symbol('x')
+        eq = math.log(A) - ch.dG/(ms.R*x)
+        plot(eq,(x,298,500))
+
+A = ms.graphik(1e25,1)
