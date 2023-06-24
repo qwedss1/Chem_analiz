@@ -10,8 +10,10 @@ class OP:
             self.a = Ravnl(num, 500, 300, root)
         elif code == "kravl":
             self.a = Krovl(num, 500, 100, root)
-        elif code=="plotl":
+        elif code == "plotl":
             self.a=Plotnik(num, 500, 300, root)
+        elif code == "doli":
+            self.a=Dolnik(num, 500, 300, root)
 
 
 class Engac():
@@ -51,7 +53,6 @@ class Ravnl:
         rt.grab_set()
         fs=20
         Label(rt, text=f"z={round(sen[0],3)}", font=("Times new roman", fs)).pack()
-        print(sen)
         for x in sen[1]:
             Label(rt, text=f"[{x[0]}]={round(x[1],3)}", font=("Times new roman", fs)).pack()
         Button(rt, text="OK", command=lambda: rt.destroy(), font=("Times new roman", fs)).pack(side=BOTTOM)
@@ -67,6 +68,39 @@ class Krovl:
         rt.grab_set()
         Label(rt, text=f"K={ms.Kravn(num)}", font=("Times new roman", 25)).pack()
         Button(rt, text="OK", command=lambda: rt.destroy(), font=("Times new roman", 25)).pack(side=BOTTOM)
+
+class Dolnik:
+    def __init__(self, num, w, h, root):
+        self.root = Toplevel(root)
+        self.h=root
+        rt=self.root
+        rt.title("Данные")
+        rt.geometry(f"{w}x{h}")
+        rt.minsize(w, h)
+        rt.maxsize(w, h)
+        rt.grab_set()
+        Label(rt, text="P", font=("Times new roman", 25)).pack()
+        e=Entry(rt, font=("Times new roman", 25))
+        e.pack()
+        Button(rt, text="Рассчёт", command=lambda: self.func(rt, e.get(), num ), font=("Times new roman", 25)).pack()
+        Button(rt, text="Выход", command=lambda: rt.destroy(), font=("Times new roman", 25)).pack(side=BOTTOM)
+
+    def func(self,rt,p,num):
+        root=Toplevel(self.h)
+        w,h=400,400
+        root.title("Доли")
+        root.geometry(f"{w}x{h}")
+        root.minsize(w, h)
+        root.maxsize(w, h)
+        root.grab_set()
+        fs = 20
+        sen=ms.EqMolGStech(num,float(p))
+        Label(root, text=f"z={round(sen[0], 3)}", font=("Times new roman", fs)).pack()
+        for x in sen[1]:
+            Label(root, text=f"[{x[0]}]={round(x[1], 3)}", font=("Times new roman", fs)).pack()
+        Button(root, text="OK", command=lambda: root.destroy(), font=("Times new roman", fs)).pack(side=BOTTOM)
+
+
 
 class Plotnik:
     def __init__(self, num, w, h, root):

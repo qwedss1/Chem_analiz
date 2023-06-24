@@ -38,12 +38,15 @@ class Moredata:
             Label(root, text=f"Ваша реакция происходит с газами",font=tkFont.Font(size=fs), justify="center").pack(fill=X)
             Label(root, text=f"можно рассчитать:",font=tkFont.Font(size=fs), justify="center").pack(fill=X)
             Label(root, bg="gray").pack()
-            Button(root, text="Равновесные мольные доли", font=tkFont.Font(size=fs)).pack(fill=X)
-            Button(root, text="Константа равновесия", font=tkFont.Font(size=fs)).pack(fill=X)
+            Button(root, text="Равновесные мольные доли", font=tkFont.Font(size=fs),command=lambda: self.doli()).pack(fill=X)
+            Button(root, text="Константа равновесия", font=tkFont.Font(size=fs), command=lambda: self.kravl()).pack(fill=X)
         Button(root, text="График LnK(T)", font=tkFont.Font(size=fs), command=lambda: self.graph()).pack(fill=X)
 
+    def doli(self):
+        o = OP(self.root, self.num, "doli", self.T, self.Init)
     def graph(self):
         o = OP(self.root, self.num, "plotl", self.T, self.Init)
+
     def Engac(self):
         o = OP(self.root, self.num, "engac", self.T, self.Init)
 
