@@ -8,49 +8,26 @@ class OP:
             self.a=Engac(T, Init, 500, 500, root)
 
 
-class MM:
-    def made(self, top, w, h, t):
-        self.root=Toplevel(top)
-        root=self.root
-        root.geometry(f"{w}x{h}")
-        root.title(t)
-        root.minsize(w, h)
-        root.maxsize(w, h)
-        self.run()
-        self.done(root)
+class Engac():
+    def __init__(self, T, init, w, h, root):
+        self.root=Toplevel(root)
+        rt=self.root
+        rt.title("Энергия Активации")
+        rt.geometry(f"{w}x{h}")
+        rt.minsize(w, h)
+        rt.maxsize(w, h)
+        Label(rt,text="k", font=("Times new roman", 16)).pack()
+        k=Entry(rt,font=("Times new roman", 16))
+        k.pack()
+        Label(rt, text="A0",font=("Times new roman", 16)).pack()
+        A0 = Entry(rt,font=("Times new roman", 16))
+        A0.pack()
+        l=Label(rt,font=("Times new roman", 16))
+        Button(rt,font=("Times new roman", 16),text="Рассчёт", command=lambda: self.sol(l, T, k.get(), A0.get())).pack()
+        l.pack()
 
-    def run(self):
-        self.root.mainloop()
-
-    def done(self,a):
-        pass
-
-
-class Engac(MM):
-    def __init__(self, t, inr, w, h, top):
-        self.Init=inr
-        self.T=t
-        self.made(top, w, h, "Энергия Активации")
-
-    def done(self, r1):
-        root=Toplevel(r1)
-        w,h=200,400
-        root.geometry(f"{w}x{h}")
-        root.minsize(w,h)
-        root.maxsize(w,h)
-        Label(root, text="Введите k и A0 соответсвующе", justify="center").pack()
-        e1 = Entry(root)
-        e2 = Entry(root)
-        e1.pack(side=LEFT)
-        e1.pack(side=LEFT)
-        Button(text="OK", command=lambda: self.Next(root, e1.get(), e2.get(), r1)).pack()
-
-    def Next(self, root, k, A0, parentt):
-        root.destroy()
-        Label(parentt, text=f"{ms.engac(A0,k,self.T)} Дж", justify="center", font =("Times New Roman", 16)).pack(fill=X)
-
-
-
+    def sol(self, l, T, k, A0):
+        l.config(text=f"Ea= {ms.engac(float(A0), float(k), float(T))}")
 
 
 
