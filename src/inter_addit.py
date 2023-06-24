@@ -16,6 +16,7 @@ class Engac():
         rt.geometry(f"{w}x{h}")
         rt.minsize(w, h)
         rt.maxsize(w, h)
+        Label(rt,text="Используйте форму записи 2.2*10^-20 = 2.2e-20", font=("Times new roman", 16)).pack()
         Label(rt,text="k", font=("Times new roman", 16)).pack()
         k=Entry(rt,font=("Times new roman", 16))
         k.pack()
