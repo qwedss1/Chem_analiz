@@ -52,9 +52,9 @@ class ms:
         return b
     @staticmethod
     def returnz(z,A):
-        a = [z,[[],[]]]
+        a = [z,[]]
         for n in range(0, len(A.reag)):
-            a[1][0].append((A.reag[n][0],A.coefs[0][n]-z))
+            a[1].append((A.reag[n][0],A.coefs[0][n]-z))
         for n in range(0, len(A.prod)):
-            a[1][1].append((A.prod[n][0],A.coefs[0][n]+z))
+            a[1].append((A.prod[n][0],A.coefs[0][n]+z))
         return a
