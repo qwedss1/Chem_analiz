@@ -44,6 +44,7 @@ class AskSenya:
         rt.minsize(w, h)
         rt.maxsize(w, h)
         Label(rt, text=f"z={sen[0]}").pack()
+        print(sen)
         for x in sen[1]:
             Label(rt, text=f"[{x[0]}]={x[1]}").pack()
         Button(rt, text="OK", command=lambda: rt.destroy()).pack()
