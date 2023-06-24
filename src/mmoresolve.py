@@ -1,5 +1,5 @@
 import math
-from sympy import Symbol,Eq, solve
+from sympy import Symbol,Eq, solve,plot
 from solve import solve as solvechem
 class ms:
     R=8.31
@@ -26,7 +26,8 @@ class ms:
         for n in range(0, len(A.prod)):
             ca = ca + A.coefs[1][n]
         eqn = Eq(c*(1-z)**ca,ms.Kravn(A.dG,A.temp))
-        return solve(eqn,z)
+        b = ms.returnz(solve(eqn,z)[0],A)
+        return b
     @staticmethod
     def EqMolGStech(num,P):
         A = solvechem(num)
@@ -47,4 +48,13 @@ class ms:
         for n in range(0, len(A.prod)):
             ca = ca + A.coefs[1][n]
         eq = Eq(c*(P*(1-z)*(all+ca*z))**ca,ms.Kravn(A.dG,A.temp))
-        return solve(eq,z)
+        b = ms.returnz(solve(eq, z)[0], A)
+        return b
+    @staticmethod
+    def returnz(z,A):
+        a = [z,[[],[]]]
+        for n in range(0, len(A.reag)):
+            a[1][0].append((A.reag[n][0],A.coefs[0][n]-z))
+        for n in range(0, len(A.prod)):
+            a[1][1].append((A.prod[n][0],A.coefs[0][n]+z))
+        return a
