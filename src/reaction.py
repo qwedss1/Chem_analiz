@@ -94,6 +94,7 @@ class Reaction:
                         json.dump(self.R, f)
                     self.win.destroy()
                     self.Init.data(self.NADA)
+                    del self.R
                     self.del_me()
         except Err:
             pass
