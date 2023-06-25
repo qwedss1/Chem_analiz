@@ -11,5 +11,5 @@
  - может быть построен график LnK(T)
 
 Для начала работы:
-pip3 install -r requirements.txt
-py __init__.py
+-pip3 install -r requirements.txt
+-py __init__.py
