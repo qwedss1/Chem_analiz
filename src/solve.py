@@ -3,7 +3,6 @@ import json
 import sympy as sp
 import math
 import chempy as cp
-import os
 
 
 class solve:
