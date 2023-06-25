@@ -2,6 +2,7 @@ from tkinter import *
 import tkinter.font as tkFont
 from solve import *
 from reaction import Err
+import os
 
 
 class Data:

@@ -11,6 +11,7 @@ class Reaction:
     R = {"R": [], "P": []}
 
     def __init__(self,a):
+        self.R = {"R": [], "P": []}
         self.Init = a
         self.win = Tk()
         self.win.geometry("1000x220")
@@ -94,7 +95,6 @@ class Reaction:
                         json.dump(self.R, f)
                     self.win.destroy()
                     self.Init.data(self.NADA)
-                    self.R={"R": [], "P": []}
                     self.del_me()
         except Err:
             pass
